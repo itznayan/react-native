@@ -8,7 +8,7 @@ export default function StartGameScreen({ onPickNumber }) {
     setEnteredNumber(enteredText);
   };
 
-  const resetInputHandler = (enteredNumber) => {
+  const resetInputHandler = () => {
     setEnteredNumber("");
   };
   const confirmInputHandler = () => {

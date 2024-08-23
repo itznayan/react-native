@@ -1,6 +1,5 @@
-import { ImageBackground } from "react-native";
+import { ImageBackground, SafeAreaView } from "react-native";
 import StartGameScreen from "./screens/StartGameScreen";
-import { StatusBar } from "expo-status-bar";
 import { LinearGradient } from "expo-linear-gradient";
 import GameScreen from "./screens/GameScreen";
 import { useState } from "react";
@@ -12,7 +11,7 @@ export default function App() {
   let screen = <StartGameScreen onPickNumber={pickedNumberHandler} />;
 
   if (userNumber) {
-    screen = <GameScreen />;
+    screen = <GameScreen userNumber={userNumber} />;
   }
 
   return (
@@ -25,8 +24,7 @@ export default function App() {
         }}
         resizeMode="cover"
       >
-        {screen}
-        <StatusBar style="dark" />
+        <SafeAreaView className="p-3">{screen}</SafeAreaView>
       </ImageBackground>
     </LinearGradient>
   );
