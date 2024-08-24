@@ -9,7 +9,7 @@ import AppLoading from "expo-app-loading";
 export default function App() {
   const [userNumber, setUserNumber] = useState();
   const [gameOver, setGameOver] = useState(true);
-
+  const [roundsGame, setRoundsGame] = useState(0);
   const [fontsLoaded] = useFonts({
     Poppins: require("./assets/font/Poppins-Black.ttf"),
     Mons: require("./assets/font/Montserrat-VariableFont_wght.ttf"),
@@ -23,8 +23,9 @@ export default function App() {
     setUserNumber(pickedNumber);
     setGameOver(false);
   };
-  const gameOverHandler = () => {
+  const gameOverHandler = (numberRounds) => {
     setGameOver(true);
+    setRoundsGame(numberRounds);
   };
 
   let screen = <StartGameScreen onPickNumber={pickedNumberHandler} />;
@@ -34,8 +35,21 @@ export default function App() {
       <GameScreen userNumber={userNumber} onGameOver={gameOverHandler} />
     );
   }
+
+  const replayGameHandler = () => {
+    setUserNumber(null);
+    setGameOver(false);
+    setRoundsGame(0);
+    screen = <StartGameScreen />;
+  };
   if (gameOver && userNumber) {
-    screen = <GameOverScreen />;
+    screen = (
+      <GameOverScreen
+        userNumber={userNumber}
+        replayGame={replayGameHandler}
+        roundsNumber={roundsGame}
+      />
+    );
   }
 
   return (
