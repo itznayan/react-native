@@ -115,7 +115,7 @@ export default function GameScreen({ userNumber, onGameOver }) {
             />
           )}
         />
-      </ScrollView>
+      </ScrollView> 
     </>
   );
 }
