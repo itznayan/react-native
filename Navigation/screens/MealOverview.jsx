@@ -13,7 +13,7 @@ export default function MealOverview({ route, navigation }) {
       (category) => category.id === catId
     ).title;
     navigation.setOptions({ title: categoryTitle });
-  }, []);
+  }, [catId, navigation]);
   const renderItems = (item) => {
     return (
       <MealItem

@@ -1,6 +1,7 @@
 import { View, Text, Image, Pressable } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
+import MealDetails from "./MealDetails";
 export default function MealItem({
   id,
   title,
@@ -20,10 +21,12 @@ export default function MealItem({
           <Image className="h-48 rounded-xl" source={{ uri: image }} />
           <Text className="py-2 text-xl font-bold text-center"> {title}</Text>
         </View>
-        <View className="flex pb-8 px-8 justify-between flex-row">
-          <Text className="uppercase">{duration} Minutes</Text>
-          <Text className="uppercase">{complexity} </Text>
-          <Text className="uppercase">{affordability}</Text>
+        <View>
+          <MealDetails
+            duration={duration}
+            complexity={complexity}
+            affordability={affordability}
+          />
         </View>
       </Pressable>
     </View>
