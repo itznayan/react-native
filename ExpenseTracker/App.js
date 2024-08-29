@@ -8,6 +8,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import RecentExpense from "./screen/RecentExpense";
 import ManageExpense from "./screen/ManageExpense";
+import Ctx from "./context/context";
 export default function App() {
   const tab = createBottomTabNavigator();
   const stack = createNativeStackNavigator();
@@ -52,20 +53,22 @@ export default function App() {
   );
   return (
     <View className="flex-1">
-      <NavigationContainer>
-        <stack.Navigator>
-          <stack.Screen
-            name="ExpenseOverView"
-            options={{ headerShown: false }}
-            component={ExpenseOverview}
-          />
-          <stack.Screen
-            name="ManageExpense"
-            component={ManageExpense}
-            options={{ title: "Manage Expense" }}
-          />
-        </stack.Navigator>
-      </NavigationContainer>
+      <Ctx>
+        <NavigationContainer>
+          <stack.Navigator>
+            <stack.Screen
+              name="ExpenseOverView"
+              options={{ headerShown: false }}
+              component={ExpenseOverview}
+            />
+            <stack.Screen
+              name="ManageExpense"
+              component={ManageExpense}
+              options={{ title: "Manage Expense", presentation: "modal" }}
+            />
+          </stack.Navigator>
+        </NavigationContainer>
+      </Ctx>
     </View>
   );
 }
