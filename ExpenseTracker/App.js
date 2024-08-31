@@ -8,7 +8,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import RecentExpense from "./screen/RecentExpense";
 import ManageExpense from "./screen/ManageExpense";
-import Ctx from "./context/context";
+import ExpensesContextProvider from "./context/context";
 export default function App() {
   const tab = createBottomTabNavigator();
   const stack = createNativeStackNavigator();
@@ -53,7 +53,7 @@ export default function App() {
   );
   return (
     <View className="flex-1">
-      <Ctx>
+      <ExpensesContextProvider>
         <NavigationContainer>
           <stack.Navigator>
             <stack.Screen
@@ -68,7 +68,7 @@ export default function App() {
             />
           </stack.Navigator>
         </NavigationContainer>
-      </Ctx>
+      </ExpensesContextProvider>
     </View>
   );
 }

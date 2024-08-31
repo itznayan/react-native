@@ -1,13 +1,15 @@
-import { View, Text, Pressable } from "react-native";
-import React, { useLayoutEffect } from "react";
+import { View, Text, Pressable, TextInput } from "react-native";
+import React, { useContext, useLayoutEffect } from "react";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import SubButton from "../app/components/SubButton";
+import { ExpensesContext } from "../context/context";
 export default function ManageExpense({ route, navigation }) {
+  const expensesCtx = useContext(ExpensesContext);
   const editedExpenseId = route.params?.expenseId;
   const isEditing = editedExpenseId;
 
   const deleteExpense = () => {
-    console.log("delete");
+    expensesCtx.deleteExpense(editedExpenseId);
     navigation.goBack();
   };
 
@@ -16,7 +18,19 @@ export default function ManageExpense({ route, navigation }) {
   };
 
   const saveExpense = () => {
-    console.log("save");
+    if (isEditing) {
+      expensesCtx.updateExpense(editedExpenseId, {
+        description: "Say Update",
+        amount: 10,
+        date: new Date("2024-08-29"),
+      });
+    } else {
+      expensesCtx.addExpense({
+        description: "Say Add",
+        amount: 10,
+        date: new Date("2024-08-29"),
+      });
+    }
     navigation.goBack();
   };
 
@@ -47,6 +61,11 @@ export default function ManageExpense({ route, navigation }) {
           </Pressable>
         </View>
       )}
+
+      <TextInput
+        className="shadow bg-gray-300 rounded-xl "
+        placeholder="Enter how much money you spend"
+      />
     </View>
   );
 }

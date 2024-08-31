@@ -1,15 +1,14 @@
 import { View, Text } from "react-native";
 import React, { useContext } from "react";
-import { context } from "../context/context";
 import Last7days from "../app/ExpenseOutput";
+import { ExpensesContext } from "../context/context";
 
 export default function AllExpense() {
-  const value = useContext(context);
-  console.log(value);
-
+  const expensesCtx = useContext(ExpensesContext);
+  
   return (
     <View>
-      <Last7days expensesPeriod="Total" />
+      <Last7days expenses={expensesCtx.expenses} expensesPeriod="Total" />
     </View>
   );
 }
