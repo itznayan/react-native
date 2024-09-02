@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { MotiView } from "moti";
 
-export default function CustomButton({ onPress, buttonVal }) {
+export default function CustomButton({ onPress, buttonVal, className }) {
   // State to manage expanded state
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -13,15 +13,18 @@ export default function CustomButton({ onPress, buttonVal }) {
   }, [buttonVal]);
 
   return (
-    <View className="flex justify-center items-center">
+    <View className={`${className} items-center `}>
       <TouchableOpacity onPress={onPress}>
         <MotiView
-          className="bg-black items-center mb-10 justify-center rounded-full"
-          from={{ width: 80, height: 80 }}
-          animate={{ width: isExpanded ? 200 : 80, height: 80 }}
+          className="items-center justify-center mb-6 bg-black rounded-full"
+          from={{ width: 120, height: 120 }}
+          animate={{
+            width: isExpanded ? 250 : 120,
+            height: isExpanded ? 80 : 120,
+          }}
           transition={{
-            type: "timing",
-            duration: 300,
+            type: "spring",
+            duration: 1400,
           }}
         >
           <AntDesign name="arrowright" size={34} color="white" />

@@ -5,6 +5,7 @@ const data = [
     text: "Lorem Ipsum dolor sit amet",
     textColor: "#f8dac2",
     backgroundColor: "#154f40",
+    otherColor: "#fd94b2",
   },
   {
     id: 2,
@@ -12,6 +13,7 @@ const data = [
     text: "Lorem Ipsum dolor sit amet",
     textColor: "#154f40",
     backgroundColor: "#fd94b2",
+    otherColor: "#f8dac2",
   },
   {
     id: 3,
@@ -19,6 +21,7 @@ const data = [
     text: "Lorem Ipsum dolor sit amet",
     textColor: "black",
     backgroundColor: "#f8dac2",
+    otherColor: "#154f40",
   },
 ];
 

@@ -20,7 +20,7 @@ export default function ItemList({
       />
       <Text
         style={{ color: textColor }}
-        className="text-4xl mx-6 text-center font-bold  absolute mt-[600]"
+        className="text-4xl mx-10 text-center font-extrabold  absolute mt-[600]"
       >
         {text}
       </Text>
