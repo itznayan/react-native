@@ -3,6 +3,7 @@ import React, { useContext, useLayoutEffect } from "react";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import SubButton from "../app/components/SubButton";
 import { ExpensesContext } from "../context/context";
+import ExpenseForm from "../app/ManageExpense/ExpenseForm";
 export default function ManageExpense({ route, navigation }) {
   const expensesCtx = useContext(ExpensesContext);
   const editedExpenseId = route.params?.expenseId;
@@ -42,6 +43,7 @@ export default function ManageExpense({ route, navigation }) {
 
   return (
     <View className="my-4">
+      <ExpenseForm />
       <View className="flex flex-row">
         <SubButton title="Cancel" onPress={cancelHandler} />
         <SubButton
@@ -61,11 +63,6 @@ export default function ManageExpense({ route, navigation }) {
           </Pressable>
         </View>
       )}
-
-      <TextInput
-        className="shadow bg-gray-300 rounded-xl "
-        placeholder="Enter how much money you spend"
-      />
     </View>
   );
 }
