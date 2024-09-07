@@ -9,6 +9,10 @@ export default function ManageExpense({ route, navigation }) {
   const editedExpenseId = route.params?.expenseId;
   const isEditing = editedExpenseId;
 
+  const selectedExpense = expensesCtx.expenses.find(
+    (expense) => expense.id === editedExpenseId
+  );
+
   const deleteExpense = () => {
     expensesCtx.deleteExpense(editedExpenseId);
     navigation.goBack();
@@ -18,19 +22,11 @@ export default function ManageExpense({ route, navigation }) {
     navigation.goBack();
   };
 
-  const saveExpense = () => {
+  const saveExpense = (expenseData) => {
     if (isEditing) {
-      expensesCtx.updateExpense(editedExpenseId, {
-        description: "Say Update",
-        amount: 10,
-        date: new Date("2024-08-29"),
-      });
+      expensesCtx.updateExpense(editedExpenseId, expenseData);
     } else {
-      expensesCtx.addExpense({
-        description: "Say Add",
-        amount: 10,
-        date: new Date("2024-08-29"),
-      });
+      expensesCtx.addExpense(expenseData);
     }
     navigation.goBack();
   };
@@ -43,14 +39,12 @@ export default function ManageExpense({ route, navigation }) {
 
   return (
     <View className="my-4">
-      <ExpenseForm />
-      <View className="flex flex-row">
-        <SubButton title="Cancel" onPress={cancelHandler} />
-        <SubButton
-          onPress={saveExpense}
-          title={isEditing ? "Update" : "Add Expense"}
-        />
-      </View>
+      <ExpenseForm
+        onCancel={cancelHandler}
+        isEditing={isEditing ? "Update" : "Add"}
+        onSubmit={saveExpense}
+        defaultValue={selectedExpense}
+      />
 
       <View className="border-b-2 border-black my-4"></View>
       {isEditing && (

@@ -10,7 +10,10 @@ export default function ExpenseItem({ id, description, amount, date }) {
 
   return (
     <Pressable onPress={onPressHandler} className="active:opacity-75">
-      <View className="flex flex-row justify-between py-2 border-[1px] mx-6 mb-3 rounded-xl px-4">
+      <View
+        style={{ elevation: 4 }}
+        className="flex flex-row bg-white justify-between py-2  mx-6 mb-3 rounded-xl px-4"
+      >
         <View>
           <Text className="text-xl ">{description}</Text>
           <Text className="px-1">{date}</Text>
