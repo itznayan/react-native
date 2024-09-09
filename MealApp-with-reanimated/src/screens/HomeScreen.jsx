@@ -9,9 +9,10 @@ import {
 import { BellIcon, MagnifyingGlassIcon } from "react-native-heroicons/outline";
 import Categories from "../components/categories";
 import axios from "axios";
+import Recipes from "../components/Recipes";
 
 export default function HomeScreen({ navigation }) {
-  const [activeCategory, setActiveCategory] = useState("Spaghetti Carbonara");
+  const [activeCategory, setActiveCategory] = useState("Beef");
   const [categories, setCategories] = useState([]);
   const getCategories = async () => {
     try {
@@ -32,18 +33,18 @@ export default function HomeScreen({ navigation }) {
   useEffect(() => {
     getCategories();
   }, []);
-  const navigate = useNavigation();
+
   return (
     <View className="bg-white flex-1">
       <StatusBar style="dark" />
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 50 }}
-        className="space-y-6 pt-14"
+        className="space-y-4 pt-14"
       >
         {/* avatar and bellicon  */}
 
-        <View className="flex-row justify-between mx-4 mb-2">
+        <View className="flex-row justify-between mx-4">
           <Image
             style={{ height: hp(5), width: hp(5.5) }}
             className="rounded-full"
@@ -76,6 +77,9 @@ export default function HomeScreen({ navigation }) {
               Home
             </Text>
           </View>
+
+          {/* searchbar for search item */}
+
           <View className="bg-black/10  rounded-full flex-row items-center py-2 justify-between px-4">
             <TextInput
               placeholder="Search any recipe"
@@ -87,6 +91,8 @@ export default function HomeScreen({ navigation }) {
             </View>
           </View>
         </View>
+
+        {/* categories section for various food item */}
         <View>
           {categories.length > 0 && (
             <Categories
@@ -95,6 +101,10 @@ export default function HomeScreen({ navigation }) {
               setActiveCategory={setActiveCategory}
             />
           )}
+        </View>
+
+        <View>
+          {categories.length > 0 && <Recipes activeCategory={activeCategory} />}
         </View>
       </ScrollView>
     </View>
