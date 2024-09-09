@@ -72,7 +72,6 @@ const RecipeItem = ({ item, index }) => {
       >
         <Animated.Image
           entering={FadeInUp.duration(1000).delay(index * 100)}
-          sharedTransitionTag={item.idMeal}
           style={{
             width: "100%",
             height: index % 3 == 0 ? hp(25) : hp(35),
