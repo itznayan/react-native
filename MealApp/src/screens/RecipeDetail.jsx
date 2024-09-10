@@ -47,6 +47,7 @@ export default function RecipeDetail(props) {
     }
     return null;
   };
+
   return (
     <ScrollView className="space-y-2">
       <Animated.Image
