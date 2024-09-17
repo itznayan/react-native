@@ -19,7 +19,6 @@ export default function RecipeDetail(props) {
   let item = props.route.params;
   const [meal, setMeal] = useState([]);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     getRecipeDetail(item.idMeal);
   }, []);
