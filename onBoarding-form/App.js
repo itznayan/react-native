@@ -10,7 +10,6 @@ export default function App() {
   // Logic for handling button click
   const nextHandler = async () => {
     if (data.length - 1 === currentIndex) {
-      setCurrentIndex(0);
       console.log("END");
     } else {
       setCurrentIndex((prev) => prev + 1);
@@ -18,7 +17,7 @@ export default function App() {
   };
 
   return (
-    <View className="flex-1">
+    <View className="flex-1 pt-10">
       <View className="flex-1">
         {data.map(
           (item, index) =>
