@@ -9,6 +9,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import RecentExpense from "./screen/RecentExpense";
 import ManageExpense from "./screen/ManageExpense";
 import ExpensesContextProvider from "./context/context";
+
 export default function App() {
   const tab = createBottomTabNavigator();
   const stack = createNativeStackNavigator();

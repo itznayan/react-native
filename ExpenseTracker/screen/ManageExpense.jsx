@@ -1,9 +1,11 @@
 import { View, Text, Pressable, TextInput } from "react-native";
 import React, { useContext, useLayoutEffect } from "react";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import SubButton from "../app/components/SubButton";
 import { ExpensesContext } from "../context/context";
 import ExpenseForm from "../app/ManageExpense/ExpenseForm";
+import { storeExpense, updateExpense } from "../util/http";
+import { deleteExpense } from "../util/http";
+
 export default function ManageExpense({ route, navigation }) {
   const expensesCtx = useContext(ExpensesContext);
   const editedExpenseId = route.params?.expenseId;
@@ -13,7 +15,8 @@ export default function ManageExpense({ route, navigation }) {
     (expense) => expense.id === editedExpenseId
   );
 
-  const deleteExpense = () => {
+  const deleteExpenseHandler = async () => {
+    await deleteExpense(editedExpenseId);
     expensesCtx.deleteExpense(editedExpenseId);
     navigation.goBack();
   };
@@ -22,11 +25,13 @@ export default function ManageExpense({ route, navigation }) {
     navigation.goBack();
   };
 
-  const saveExpense = (expenseData) => {
+  const saveExpense = async (expenseData) => {
     if (isEditing) {
       expensesCtx.updateExpense(editedExpenseId, expenseData);
+      await updateExpense(editedExpenseId, expenseData);
     } else {
-      expensesCtx.addExpense(expenseData);
+      const id = await storeExpense(expenseData);
+      expensesCtx.addExpense({ ...expenseData, id });
     }
     navigation.goBack();
   };
@@ -50,7 +55,7 @@ export default function ManageExpense({ route, navigation }) {
       {isEditing && (
         <View className="flex items-center">
           <Pressable
-            onPress={deleteExpense}
+            onPress={deleteExpenseHandler}
             className="bg-red-600 px-4 py-2 rounded-xl active:opacity-80"
           >
             <AntDesign name="delete" size={40} color="white" />
